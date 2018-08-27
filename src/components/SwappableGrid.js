@@ -37,7 +37,7 @@ const instructions = Platform.select({
 
 import imageType from "../components/ImageTypes";
 
-import { getJamJarFromBean, isJam } from "../components/JamFunctions";
+import { getJamJarFromBean, isCandy, getCandyFromBean, isJam } from "../components/JamFunctions";
 
 import {
   getRandomInt,
@@ -102,6 +102,11 @@ export default class Swappables extends Component<{}> {
 
     // Inititalize to swipe up, will change later.
     this.swipeDirection = swipeDirections.SWIPE_UP;
+    this.isCandy = false
+    this.currentIJ = {}
+    this.nextIJ = {}
+    this.crunchThisImage = imageType.REDJELLYBEAN
+    this.crunchTheseIfCandy = new Array([[0,0]]);
 
     // Speed of the animations
     this.speed = 100; // Rate at which the animation occurs.
@@ -245,6 +250,34 @@ export default class Swappables extends Component<{}> {
   }
 
   // takes the indexes that will be animated and
+  animateCandyCrunch(indexesToAnimate) {
+
+    let len = indexesToAnimate.length;
+
+    for (var n = 0; n < len; n++) {
+      let e = indexesToAnimate[n];
+
+      let i = e[0];
+      let j = e[1];
+
+      Animated.sequence([
+        Animated.delay(350),
+        Animated.timing(this.state.tileDataSource[i][j].scale, {
+          toValue: 1.05,
+          duration: 150
+        }),
+        Animated.timing(this.state.tileDataSource[i][j].scale, {
+          toValue: 0,
+          duration: 150
+        }),
+      ]).start(() => {
+        this.animationState = animationType.FALL;
+      });
+    }
+  }
+
+
+  // takes the indexes that will be animated and
   animateBeanMatch(indexesToAnimate, location) {
     let locationToAnimateTo = [
       location[0] * TILE_WIDTH,
@@ -280,10 +313,9 @@ export default class Swappables extends Component<{}> {
   }
 
   condenseColumns(beanIndexes) {
-    console.log("condensing this data", beanIndexes);
 
     let spotsToFill = 0;
-    // HARDCODED!
+    // NOTE: HARDCODED!
     for (let i = 0; i < 5; i++) {
       spotsToFill = 0;
 
@@ -303,6 +335,8 @@ export default class Swappables extends Component<{}> {
             x: TILE_WIDTH * i,
             y: -3 * TILE_WIDTH
           });
+          this.state.tileDataSource[i][j].scale.setValue(1);
+
         } else if (spotsToFill > 0) {
           // Move bean downward
           const currentSpot = this.state.tileDataSource[i][j];
@@ -362,6 +396,9 @@ export default class Swappables extends Component<{}> {
     let swipeBeganAt = [i, j];
     let swipeDirectedAt = [i + dx, j + dy];
 
+    this.currentIJ = swipeBeganAt
+    this.nextIJ = swipeDirectedAt
+
     // If the indexes are the same as the previous two then give the turn back.
     if (
       this.containsIndexPair(this.previousSwappedIndexes, swipeBeganAt) &&
@@ -373,6 +410,7 @@ export default class Swappables extends Component<{}> {
       let inc = Math.pow(-1, this.consecutiveSwaps);
       console.log("increment", inc);
       this.props.incrementTurns(inc);
+
     } else {
       console.log("Don't need to give swap back");
       this.props.incrementTurns(-1);
@@ -386,7 +424,20 @@ export default class Swappables extends Component<{}> {
     const swapStarter = this.state.tileDataSource[i][j];
     const swapEnder = this.state.tileDataSource[i + dx][j + dy];
 
-    // Perform the swap
+
+
+    // NOTE Collect Swap metadata to determine how to manage the candy (now RainbowBean)
+    if (this.isCandy = isCandy(swapStarter.imageType)){
+      this.crunchThisImage = swapEnder.imageType
+      this.crunchTheseIfCandy = this.getIndexesWithColor(this.crunchThisImage)
+      this.crunchTheseIfCandy.push(this.currentIJ)
+    } else if (this.isCandy = isCandy(swapEnder.imageType)){
+      this.crunchThisImage = swapStarter.imageType
+      this.crunchTheseIfCandy = this.getIndexesWithColor(this.crunchThisImage)
+      this.crunchTheseIfCandy.push(this.nextIJ)
+    }
+
+    // Perform the swap - this calls "Component did update" - I think.
     newData[i][j] = swapEnder;
     newData[i + dx][j + dy] = swapStarter;
 
@@ -401,7 +452,41 @@ export default class Swappables extends Component<{}> {
 
     let allMatches = this.allMatchesOnBoard();
 
-    if (allMatches.length != 0) {
+    if (this.isCandy){
+
+
+        if (isJam(this.crunchThisImage)){
+          jamThisTurn = this.crunchTheseIfCandy.length
+          this.props.incrementTurns(jamThisTurn);
+        } else {
+          beansThisTurn = this.crunchTheseIfCandy.length*3
+          this.props.incrementTurns(1)
+        }
+
+        this.props.updateScore(beansThisTurn,jamThisTurn)
+
+        this.animateCandyCrunch(this.crunchTheseIfCandy)
+
+        setTimeout(()=> {
+        this.recolorMatches(this.crunchTheseIfCandy)
+        this.condenseColumns(this.crunchTheseIfCandy)
+        this.pushTileDataToComponent()
+        this.animationState = animationType.SWAP
+
+        setTimeout(() => {
+          if (this.allMatchesOnBoard().length != 0) {
+            this.isCandy = false
+            this.updateGrid();
+          } else {
+            this.cancelTouches = false;
+            this.animationState = animationType.SWAP;
+          }
+        }, 1200);
+
+      },1200)
+
+    }
+    else if (allMatches.length != 0) {
       this.cancelTouches = true;
       // Previousy swapped indexes stores the indexes that were most
       // recently swapped to determine if turn reimbursement
@@ -416,6 +501,8 @@ export default class Swappables extends Component<{}> {
       // These are the indexes that were matched and need to be replaced with new beans
       let indexesToRemove = [];
       if (duplicates.length == 1) {
+
+
         const withSharedIndexes = duplicates.map(e => {
           let allWithIndex = returnAllMatchesWithIndex(allMatches, e);
           if (allWithIndex.length > 0) {
@@ -427,18 +514,53 @@ export default class Swappables extends Component<{}> {
 
         const withoutSharedIndexes = duplicates.map(e => {
           let allWithOutIndex = removeAllMatchesWithIndex(allMatches, e);
-          if (allWithIndexOut.length > 0) {
+          if (allWithOutIndex.length > 0) {
             return allWithOutIndex;
           } else {
             return [];
           }
         });
 
+
         withSharedIndexes.map((row, i) => {
           // This reduces the beans this turn by one to account for the shared index being counted twice
           beansThisTurn = beansThisTurn - withSharedIndexes.length;
           // Animate to the index that they share
           let animateTo = this.sharedIndex(row[0], row[1]);
+          let jar = null;
+
+          row.map(match => {
+            // Get the indexs of the first item
+            let i = match[0][0];
+            let j = match[0][1];
+            let currentImage = this.state.tileDataSource[i][j].imageType;
+
+            if (isJam(currentImage)) {
+              //
+              this.animateBeanMatch(match, [1, 10]);
+              jamThisTurn += match.length;
+              this.props.animateTuffysHead();
+            } else {
+              jar = getCandyFromBean(currentImage)
+              this.animateBeanMatch(match, animateTo);
+              beansThisTurn += match.length;
+              indexesToRemove.push(animateTo);
+            }
+          });
+
+          this.state.tileDataSource[animateTo[0]][animateTo[1]].setView(jar);
+
+        });
+
+        // Check to see if the first match in the set of those withoutSharedIndexes is zero.
+        if (withoutSharedIndexes[0].length != 0){
+
+        withoutSharedIndexes.map((row, i) => {
+          // This reduces the beans this turn by one to account for the shared index being counted twice
+          beansThisTurn = beansThisTurn - withSharedIndexes.length;
+          // Animate to the index that they share
+          let animateTo = row[0][0]
+          console.log("animateTo in withoutSharedIndexes",animateTo)
           let jar = null;
 
           row.map(match => {
@@ -462,24 +584,30 @@ export default class Swappables extends Component<{}> {
 
           this.state.tileDataSource[animateTo[0]][animateTo[1]].setView(jar);
 
-          console.log("withSharedIndexes", withSharedIndexes);
-
-          console.log(
-            "flattened to pairs",
-            flattenArrayToPairs(withSharedIndexes)
-          );
         });
+}
+
       } else {
         allMatches.map(match => {
-          // Retreive first index in match
+
           let u = match[0][0];
           let v = match[0][1];
+
+          if (match.length > 3) {
+            jar = getCandyFromBean(this.state.tileDataSource[u][v].imageType)
+          }
+          // Retreive first index in match
           if (isJam(this.state.tileDataSource[u][v].imageType)) {
             this.animateBeanMatch(match, [2, 10]);
             this.props.animateTuffysHead();
             jamThisTurn += match.length;
           } else {
-            jar = getJamJarFromBean(this.state.tileDataSource[u][v].imageType);
+            // Give them candy if the match is greater than 3.
+            if (match.length > 3) {
+              jar = getCandyFromBean(this.state.tileDataSource[u][v].imageType)
+            } else {
+                jar = getJamJarFromBean(this.state.tileDataSource[u][v].imageType);
+            }
             this.state.tileDataSource[u][v].setView(jar);
             this.animateBeanMatch(match, match[0]);
             beansThisTurn += match.length;
@@ -503,6 +631,7 @@ export default class Swappables extends Component<{}> {
 
       // Waits for "animate match" to complete.
       setTimeout(() => {
+
         allMatches.map(match => {
           this.recolorMatches(match);
           this.condenseColumns(match);
@@ -521,6 +650,9 @@ export default class Swappables extends Component<{}> {
         }, 1200);
       }, 1200);
     }
+
+
+
   }
 
   componentDidUpdate() {

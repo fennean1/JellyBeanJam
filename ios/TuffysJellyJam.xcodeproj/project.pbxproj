@@ -1281,6 +1281,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.numbershapes.jellyjam;
 				PRODUCT_NAME = TuffysJellyJam;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1303,6 +1304,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.numbershapes.jellyjam;
 				PRODUCT_NAME = TuffysJellyJam;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

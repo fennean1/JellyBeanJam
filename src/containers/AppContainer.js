@@ -20,7 +20,7 @@ const {
   ImageBackground
 } = ReactNative;
 
-import { TabNavigator, StackNavigator } from "react-navigation";
+import { createBottomTabNavigator, createStackNavigator } from "react-navigation";
 
 let floatingClouds = require("../assets/FloatingClouds.png");
 let justClouds = require("../assets/CloudsBackground.png");
@@ -33,7 +33,7 @@ const Home = ({ navigation, screenProps }) => {
   return <HomeScreen navigation={navigation} screenProps={screenProps} />;
 };
 
-const PlayerTabs = TabNavigator({
+const PlayerTabs = createBottomTabNavigator({
   MainTab: {
     screen: Game,
     navigationOptions: {
@@ -46,7 +46,7 @@ const PlayerTabs = TabNavigator({
   }
 });
 
-const AppNavigator = StackNavigator({
+const AppNavigator = createStackNavigator({
   Root: {
     screen: Home,
     navigationOptions: {

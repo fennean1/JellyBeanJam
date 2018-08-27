@@ -193,7 +193,7 @@ class GameScreen extends Component {
       y: -7 * TILE_WIDTH
     });
 
-    //this.dropModal();
+    this.dropModal();
     console.log("This is the tile width:", TILE_WIDTH);
   }
 
@@ -223,7 +223,7 @@ class GameScreen extends Component {
               onPress={this.justPlayGame.bind(this)}
               style={styles.justPlayButton}
             >
-              <Image source={playButton} style={styles.backGroundImage} />
+            <Text style = {styles.modalButtonText}> Just Play!</Text>
             </TouchableHighlight>
             <TouchableHighlight
               style={styles.nextButton}

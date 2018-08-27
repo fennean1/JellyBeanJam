@@ -83,11 +83,13 @@ export const withoutSharedIndexes = duplicates.map(e => {
 });
 */
 
+
+
 // Returns all arrays that have an index of "index" within them. For two dimensional array.
 export const returnAllMatchesWithIndex = (matches, index) => {
   let withIndex = [];
   matches.map(match => {
-    if (this.containsIndexPair(match, index)) {
+    if (containsIndexPair(match, index)) {
       withIndex.push(match);
     }
   });
@@ -97,9 +99,9 @@ export const returnAllMatchesWithIndex = (matches, index) => {
 export const removeAllMatchesWithIndex = (matches, index) => {
   let withOutIndex = [];
   matches.map(match => {
-    if (!this.containsIndexPair(match, index)) {
-      withIndex.push(match);
+    if (!containsIndexPair(match, index)) {
+      withOutIndex.push(match);
     }
   });
-  return withIndex;
+  return withOutIndex;
 };
