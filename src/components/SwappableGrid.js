@@ -249,7 +249,7 @@ export default class Swappables extends Component<{}> {
     return this.returnTileDataComponents();
   }
 
-  // takes the indexes that will be animated and
+  // takes the indexes that will be animated
   animateCandyCrunch(indexesToAnimate) {
 
     let len = indexesToAnimate.length;
@@ -321,7 +321,7 @@ export default class Swappables extends Component<{}> {
 
       // Iterate through each column
       for (let j = 4; j >= 0; j--) {
-        // Get all the
+        // NOTE: Wait...there's only one of this. Couldn't I use "containsIndexPair?""
         let indexesToFill = beanIndexes.filter(e => {
           return i == e[0] && j == e[1];
         });
@@ -413,6 +413,7 @@ export default class Swappables extends Component<{}> {
 
     } else {
       console.log("Don't need to give swap back");
+      this.consecutiveSwaps = 1
       this.props.incrementTurns(-1);
     }
 
@@ -452,18 +453,20 @@ export default class Swappables extends Component<{}> {
 
     let allMatches = this.allMatchesOnBoard();
 
+    // CANDY MEANS RAINBOW BEAN!
     if (this.isCandy){
 
 
         if (isJam(this.crunchThisImage)){
-          jamThisTurn = this.crunchTheseIfCandy.length
+          jamThisTurn = this.crunchTheseIfCandy.length  // crunchTheseIfCandy contains
+          // the index of the rainbow bean so we have to subtract one.
           this.props.incrementTurns(jamThisTurn);
         } else {
-          beansThisTurn = this.crunchTheseIfCandy.length*3
+          beansThisTurn = (this.crunchTheseIfCandy.length-1)*5
           this.props.incrementTurns(1)
         }
 
-        this.props.updateScore(beansThisTurn,jamThisTurn)
+        this.props.updateScore(beansThisTurn,3*jamThisTurn)
 
         this.animateCandyCrunch(this.crunchTheseIfCandy)
 
@@ -618,13 +621,13 @@ export default class Swappables extends Component<{}> {
 
       // Everytime you get jam match you get extra turns.
       if (jamThisTurn > 0) {
-        this.props.incrementTurns(2 * (jamThisTurn - 2));
+        this.props.incrementTurns(2*(jamThisTurn-2));
       }
 
-      this.props.updateScore(beansThisTurn, jamThisTurn);
+      this.props.updateScore(beansThisTurn, 3*jamThisTurn);
 
-      // TODO: Write a function that removes an array of indexes so I don't have to keep slicing away and I can control what gets "condensed"
-
+      // TODO: Flatten all matches before...wait...what about duplicate indexes?
+      // Duplicate indexes will never need removal!!!!!
       allMatches = allMatches.map(match => {
         return this.removeIndexes(match, indexesToRemove);
       });
@@ -888,15 +891,14 @@ export default class Swappables extends Component<{}> {
       let i = e[0];
       let j = e[1];
       let randIndex = getRandomInt(7);
-
       this.state.tileDataSource[i][j].setView(beans[randIndex]);
     });
   }
 
   render() {
     const config = {
-      velocityThreshold: 0.1,
-      directionalOffsetThreshold: 20
+      velocityThreshold: 0.11,
+      directionalOffsetThreshold: 50
     };
 
     return (

@@ -7,7 +7,6 @@ import TurnIndicator from "../components/TurnIndicator";
 import ImageTypes from "../components/ImageTypes";
 
 import { getJamJarFromBean } from "../components/JamFunctions";
-import InstructionalScene from "./InstructionalScene";
 
 var HomeScreen = require("../components/HomeScreen");
 let playButton = require("../assets/PlayButton.png");
@@ -26,14 +25,14 @@ const {
 const InstructionalScenes = [
   ImageTypes.SWIPEINSTRUCTIONS,
   ImageTypes.BEANINSTRUCTIONS,
-  ImageTypes.JARINSTRUCTIONS
+  ImageTypes.JARINSTRUCTIONS,
+  ImageTypes.RAINBOWINSTRUCTIONS,
 ];
 
 let floatingClouds = require("../assets/FloatingClouds.png");
 let justClouds = require("../assets/CloudsBackground.png");
-let RedJam = require("../assets/RedJam.png");
 let tuffysCartoonHead = require("../assets/TuffyTile.png");
-let rowOfJam = require("../assets/JarsOfJam.png");
+let EndGameScene = require("../assets/EndGameScene.png");
 
 class GameScreen extends Component {
   constructor(props) {
@@ -41,6 +40,8 @@ class GameScreen extends Component {
 
     this.instructionsCompleted = false;
     this.tuffysHeadHeight = 50;
+    // NOTE: This ensures that the swipe gestures are registerd in the correct location.
+    // Be careful when modifying.
     this.topMargin = 1.5 * TILE_WIDTH + windowHeight / 2 - 4 * TILE_WIDTH;
 
     this.gameOver = false;
@@ -52,7 +53,7 @@ class GameScreen extends Component {
       restart: false,
       tuffysHeadLocation: new Animated.ValueXY(0, 0),
       gameModalLocation: new Animated.ValueXY(0, 0),
-      numberOfMoves: 25,
+      numberOfMoves: 1,
       jamScore: 0,
       totalScore: 0,
       beanScore: 0,
@@ -80,7 +81,6 @@ class GameScreen extends Component {
   endGame() {
     this.gameOver = true;
     this.dropModal();
-    this.showTuffy();
   }
 
   showTuffy() {
@@ -111,18 +111,6 @@ class GameScreen extends Component {
     ]).start();
   }
 
-  /*
-  restartGame() {
-    this.hideModal();
-    this.setState({ modalIndex: 0 });
-    this.setState({ jamScore: 0 });
-    this.setState({ numberOfMoves: 25 });
-    this.setState({ totalScore: 0 });
-    this.animateTuffysHead();
-
-    this.gameOver = false;
-  }
-  */
 
   restartGame() {
     const { navigate } = this.props.navigation;
@@ -168,14 +156,8 @@ class GameScreen extends Component {
     let { beanScore } = this.state;
     let { jamScore } = this.state;
 
-    let inc = 0;
-
-    if (beans != 0) {
-      inc = 3 * (beans - 2);
-    }
-
-    jamScore = jamScore + 3 * jam;
-    beanScore = beanScore + inc;
+    jamScore = jamScore + jam;
+    beanScore = beanScore + beans
     totalScore = jamScore + beanScore;
 
     this.setState({ beanScore: beanScore });
@@ -194,7 +176,6 @@ class GameScreen extends Component {
     });
 
     this.dropModal();
-    console.log("This is the tile width:", TILE_WIDTH);
   }
 
   justPlayGame() {
@@ -219,13 +200,13 @@ class GameScreen extends Component {
             source={InstructionalScenes[i]} //NOTE: Array and indexes go here
           />
           <View style={styles.modalButtonsRow}>
-            <TouchableHighlight
+            <TouchableHighlight underlayColor = {"white"}
               onPress={this.justPlayGame.bind(this)}
               style={styles.justPlayButton}
             >
-            <Text style = {styles.modalButtonText}> Just Play!</Text>
+            <Text style = {styles.justPlayButtonText}> Just Play!</Text>
             </TouchableHighlight>
-            <TouchableHighlight
+            <TouchableHighlight underlayColor = {"white"}
               style={styles.nextButton}
               onPress={this.nextInstructions.bind(this)}
             >
@@ -236,14 +217,19 @@ class GameScreen extends Component {
       );
     } else {
       return (
-        <View style={styles.finalScoreModal}>
-          <Text style={styles.scoreText}>{this.state.totalScore} Points</Text>
+        <View style={styles.gameModalContainer}>
+          <ImageBackground
+            style={styles.gameModalImage}
+            source={EndGameScene}
+        >
+          <Text style = {styles.finalScoreText}> {this.state.totalScore} Points! </Text>
+          </ImageBackground>
           <View style={styles.modalButtonsRow}>
-            <TouchableHighlight
-              onPress={this.restartGame.bind(this)}
-              style={styles.justPlayButton}
+            <TouchableHighlight underlayColor = {"white"}
+              style={styles.playAgainButton}
+              onPress={() => navigate("Root")}
             >
-              <Text style={styles.modalButtonText}>{"Play Again"}</Text>
+              <Text style={styles.playAgainButtonText}>Play Again!</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -286,7 +272,7 @@ class GameScreen extends Component {
     let scale = this.state.tuffysHeadScale;
 
     let backButton = (
-      <TouchableHighlight
+      <TouchableHighlight underlayColor = {"white"}
         style={styles.backButton}
         onPress={() => navigate("Root")}
       >
@@ -388,9 +374,9 @@ let styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     width: 6 * TILE_WIDTH,
-    height: 6 * TILE_WIDTH
+    height: 6 * TILE_WIDTH,
+    //backgroundColor: orange
   },
-
   gameModalImage: {
     width: 6 * TILE_WIDTH,
     height: 6 * TILE_WIDTH,
@@ -422,6 +408,20 @@ let styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center"
   },
+  modalbackGroundImage: {
+    flex: 1,
+    width: windowWidth,
+    height: windowHeight,
+    flexDirection: "column",
+    alignItems: "center",
+    borderRadius: TILE_WIDTH/3
+  },
+  imageWithContent: {
+    flex: 1,
+    position: 'absolute',
+    width: '100%',
+    height:'100%'
+  },
   topBarAndGridContainer: {
     flex: 1,
     flexDirection: "column",
@@ -452,23 +452,19 @@ let styles = StyleSheet.create({
     flex: 5,
     //backgroundColor: "#ff51f3",
     textAlign: "center",
-    //fontFamily: "ChalkboardSE-Regular",
+    fontFamily: "ChalkboardSE-Regular",
     fontSize: TILE_WIDTH / 1.5
     //alignItems: "center"
     //backgroundColor: "blue"
     //color       : '#fff'
   },
-  scoreText: {
+  finalScoreText: {
     flex: 1,
-    backgroundColor: "#ff51f3",
+    marginTop: TILE_WIDTH/2,
     textAlign: "center",
-    //fontFamily: "ChalkboardSE-Regular",
+    fontFamily: "ChalkboardSE-Regular",
     fontSize: TILE_WIDTH / 1.5,
     alignItems: "center"
-  },
-  backArrow: {
-    //fontSize: 50
-    //fontSize: "ChalkBoard SE"
   },
   leaveGameButton: {
     width: TILE_WIDTH,
@@ -477,12 +473,12 @@ let styles = StyleSheet.create({
   scoreText: {
     alignItems: "center",
     textAlign: "center",
-    //fontFamily: "ChalkboardSE-Regular",
+    fontFamily: "ChalkboardSE-Regular",
     fontSize: TILE_WIDTH / 1.5
   },
   gameOverModal: {
     position: "absolute",
-    height: 6 * TILE_WIDTH,
+    height: 7 * TILE_WIDTH,
     width: 6 * TILE_WIDTH,
     flexDirection: "column"
   },
@@ -512,21 +508,38 @@ let styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: TILE_WIDTH / 1.5,
-    backgroundColor: "#9404ed",
-    //fontFamily: "ChalkboardSE-Regular",
+    backgroundColor: "#B045FF",
     borderRadius: TILE_WIDTH / 5
+  },
+  playAgainButton: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    height: TILE_WIDTH / 1.5,
+    backgroundColor: "white",
+    borderRadius: TILE_WIDTH / 5,
+    borderWidth: TILE_WIDTH/80,
+  },
+  justPlayButtonText: {
+    fontSize: TILE_WIDTH / 3,
+    fontFamily: "ChalkboardSE-Regular",
+    color: "#9135EE"
   },
   modalButtonText: {
     fontSize: TILE_WIDTH / 3,
-    color: white
-    //fontFamily: "ChalkboardSE-Regular"
+    color: "#FFF65F",
+    fontFamily: "ChalkboardSE-Regular"
+  },
+  playAgainButtonText: {
+    fontSize: TILE_WIDTH / 3,
+    fontFamily: "ChalkboardSE-Regular",
   },
   justPlayButton: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
     height: TILE_WIDTH / 1.5,
-    backgroundColor: "#ff447c",
+    backgroundColor: "#FFF65F",
     borderRadius: TILE_WIDTH / 5
   }
 });

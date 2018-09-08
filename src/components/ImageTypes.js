@@ -19,7 +19,7 @@ let PinkJam = require("../assets/PinkJam.png");
 let PurpleJam = require("../assets/PurpleJam.png");
 
 
-// Candy
+// Candy (Now just a rainbow bean)
 let BlueCandy = require("../assets/RainbowBean.png");
 let RedCandy = require("../assets/RainbowBean.png");
 let GreenCandy = require("../assets/RainbowBean.png");
@@ -37,6 +37,7 @@ let TurnIndicatorImage = require("../assets/TurnIndicatorImage.png");
 let SwipeInstructions = require("../assets/SwipeInstructionalScene.png");
 let BeanInstructions = require("../assets/BeanInstructionalScene.png");
 let JarInstructions = require("../assets/JarInstructionalScene.png");
+let RainbowInstructions = require("../assets/RainbowInstructionalScene.png")
 let RainbowJam = require("../assets/RainbowJam.png")
 
 const imageType = {
@@ -68,6 +69,7 @@ const imageType = {
   SWIPEINSTRUCTIONS: SwipeInstructions,
   BEANINSTRUCTIONS: BeanInstructions,
   JARINSTRUCTIONS: JarInstructions,
+  RAINBOWINSTRUCTIONS: RainbowInstructions,
   RAINBOWJAM: RainbowJam
 };
 

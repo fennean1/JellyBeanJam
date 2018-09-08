@@ -62,7 +62,7 @@ let styles = StyleSheet.create({
     height: TILE_WIDTH,
     justifyContent: "center",
     alignItems: "center",
-    padding: TILE_WIDTH / 4
+    padding: TILE_WIDTH / 4.5
   },
   text: {
     flex: 1,
@@ -70,8 +70,8 @@ let styles = StyleSheet.create({
     height: 0.8 * TILE_WIDTH,
     fontSize: TILE_WIDTH / 3,
     alignItems: "center",
-    textAlign: "center"
-    //fontFamily: "ChalkboardSE-Regular"
+    textAlign: "center",
+    fontFamily: "ChalkboardSE-Regular"
   },
   image: {
     width: 0.8 * TILE_WIDTH,

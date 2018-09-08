@@ -22,6 +22,27 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		1CB98CF52134F1560020427F /* YellowJam.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98CE82134F1550020427F /* YellowJam.png */; };
+		1CB98CF62134F1560020427F /* YellowJellyBean.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98CE92134F1550020427F /* YellowJellyBean.png */; };
+		1CB98CF72134F1560020427F /* PinkJellyBean.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98CEA2134F1550020427F /* PinkJellyBean.png */; };
+		1CB98CF82134F1560020427F /* RedJam.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98CEB2134F1550020427F /* RedJam.png */; };
+		1CB98CF92134F1560020427F /* RainbowBean.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98CEC2134F1550020427F /* RainbowBean.png */; };
+		1CB98CFA2134F1560020427F /* JellyJam.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98CED2134F1560020427F /* JellyJam.png */; };
+		1CB98CFB2134F1560020427F /* PinkJam.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98CEE2134F1560020427F /* PinkJam.png */; };
+		1CB98CFC2134F1560020427F /* PurpleJam.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98CEF2134F1560020427F /* PurpleJam.png */; };
+		1CB98CFD2134F1560020427F /* BlueJellyBean.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98CF02134F1560020427F /* BlueJellyBean.png */; };
+		1CB98CFE2134F1560020427F /* BlueJam.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98CF12134F1560020427F /* BlueJam.png */; };
+		1CB98CFF2134F1560020427F /* OrangeJellyBean.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98CF22134F1560020427F /* OrangeJellyBean.png */; };
+		1CB98D002134F1560020427F /* PurpleJellyBean.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98CF32134F1560020427F /* PurpleJellyBean.png */; };
+		1CB98D012134F1560020427F /* RedJellyBean.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98CF42134F1560020427F /* RedJellyBean.png */; };
+		1CB98D042134F2710020427F /* GreenJam.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98D022134F2700020427F /* GreenJam.png */; };
+		1CB98D052134F2710020427F /* GreenJellyBean.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98D032134F2710020427F /* GreenJellyBean.png */; };
+		1CB98D09213588730020427F /* TuffysLandingScreenBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98D08213588710020427F /* TuffysLandingScreenBackground.png */; };
+		1CB98D0D213595780020427F /* TuffyShrugging.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98D0C213595760020427F /* TuffyShrugging.png */; };
+		1CB98D0F2135AFF20020427F /* CloudsBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98D0E2135AFF00020427F /* CloudsBackground.png */; };
+		1CB98D112135B06B0020427F /* TuffysLandingScreenBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98D102135B06B0020427F /* TuffysLandingScreenBackground.png */; };
+		1CB98D132135B0830020427F /* BackGroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98D122135B0820020427F /* BackGroundImage.png */; };
+		1CB98D152135B1070020427F /* JellyBeanJamLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB98D142135B1060020427F /* JellyBeanJamLogo.png */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -345,6 +366,27 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TuffysJellyJam/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = TuffysJellyJam/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		1CB98CE82134F1550020427F /* YellowJam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowJam.png; path = ../src/assets/YellowJam.png; sourceTree = "<group>"; };
+		1CB98CE92134F1550020427F /* YellowJellyBean.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowJellyBean.png; path = ../src/assets/YellowJellyBean.png; sourceTree = "<group>"; };
+		1CB98CEA2134F1550020427F /* PinkJellyBean.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PinkJellyBean.png; path = ../src/assets/PinkJellyBean.png; sourceTree = "<group>"; };
+		1CB98CEB2134F1550020427F /* RedJam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RedJam.png; path = ../src/assets/RedJam.png; sourceTree = "<group>"; };
+		1CB98CEC2134F1550020427F /* RainbowBean.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RainbowBean.png; path = ../src/assets/RainbowBean.png; sourceTree = "<group>"; };
+		1CB98CED2134F1560020427F /* JellyJam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = JellyJam.png; path = ../src/assets/JellyJam.png; sourceTree = "<group>"; };
+		1CB98CEE2134F1560020427F /* PinkJam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PinkJam.png; path = ../src/assets/PinkJam.png; sourceTree = "<group>"; };
+		1CB98CEF2134F1560020427F /* PurpleJam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PurpleJam.png; path = ../src/assets/PurpleJam.png; sourceTree = "<group>"; };
+		1CB98CF02134F1560020427F /* BlueJellyBean.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlueJellyBean.png; path = ../src/assets/BlueJellyBean.png; sourceTree = "<group>"; };
+		1CB98CF12134F1560020427F /* BlueJam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlueJam.png; path = ../src/assets/BlueJam.png; sourceTree = "<group>"; };
+		1CB98CF22134F1560020427F /* OrangeJellyBean.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OrangeJellyBean.png; path = ../src/assets/OrangeJellyBean.png; sourceTree = "<group>"; };
+		1CB98CF32134F1560020427F /* PurpleJellyBean.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PurpleJellyBean.png; path = ../src/assets/PurpleJellyBean.png; sourceTree = "<group>"; };
+		1CB98CF42134F1560020427F /* RedJellyBean.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RedJellyBean.png; path = ../src/assets/RedJellyBean.png; sourceTree = "<group>"; };
+		1CB98D022134F2700020427F /* GreenJam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GreenJam.png; path = ../src/assets/GreenJam.png; sourceTree = "<group>"; };
+		1CB98D032134F2710020427F /* GreenJellyBean.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GreenJellyBean.png; path = ../src/assets/GreenJellyBean.png; sourceTree = "<group>"; };
+		1CB98D08213588710020427F /* TuffysLandingScreenBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TuffysLandingScreenBackground.png; path = TuffysJellyJam/TuffysLandingScreenBackground.png; sourceTree = "<group>"; };
+		1CB98D0C213595760020427F /* TuffyShrugging.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TuffyShrugging.png; path = TuffysJellyJam/TuffyShrugging.png; sourceTree = "<group>"; };
+		1CB98D0E2135AFF00020427F /* CloudsBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CloudsBackground.png; path = ../src/assets/CloudsBackground.png; sourceTree = "<group>"; };
+		1CB98D102135B06B0020427F /* TuffysLandingScreenBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TuffysLandingScreenBackground.png; path = TuffysJellyJam/TuffysLandingScreenBackground.png; sourceTree = "<group>"; };
+		1CB98D122135B0820020427F /* BackGroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackGroundImage.png; path = TuffysJellyJam/BackGroundImage.png; sourceTree = "<group>"; };
+		1CB98D142135B1060020427F /* JellyBeanJamLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = JellyBeanJamLogo.png; path = TuffysJellyJam/JellyBeanJamLogo.png; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* TuffysJellyJam-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TuffysJellyJam-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* TuffysJellyJam-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TuffysJellyJam-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -493,6 +535,7 @@
 		13B07FAE1A68108700A75B9A /* TuffysJellyJam */ = {
 			isa = PBXGroup;
 			children = (
+				1CB98CBF2134EF680020427F /* Assets */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -541,6 +584,34 @@
 				1CB7E64F212CFD7700626009 /* libRNSound.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1CB98CBF2134EF680020427F /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				1CB98CF12134F1560020427F /* BlueJam.png */,
+				1CB98CF02134F1560020427F /* BlueJellyBean.png */,
+				1CB98CED2134F1560020427F /* JellyJam.png */,
+				1CB98CF22134F1560020427F /* OrangeJellyBean.png */,
+				1CB98CEE2134F1560020427F /* PinkJam.png */,
+				1CB98CEA2134F1550020427F /* PinkJellyBean.png */,
+				1CB98CEF2134F1560020427F /* PurpleJam.png */,
+				1CB98CF32134F1560020427F /* PurpleJellyBean.png */,
+				1CB98D022134F2700020427F /* GreenJam.png */,
+				1CB98D0E2135AFF00020427F /* CloudsBackground.png */,
+				1CB98D032134F2710020427F /* GreenJellyBean.png */,
+				1CB98D0C213595760020427F /* TuffyShrugging.png */,
+				1CB98CEC2134F1550020427F /* RainbowBean.png */,
+				1CB98D142135B1060020427F /* JellyBeanJamLogo.png */,
+				1CB98D122135B0820020427F /* BackGroundImage.png */,
+				1CB98CEB2134F1550020427F /* RedJam.png */,
+				1CB98CF42134F1560020427F /* RedJellyBean.png */,
+				1CB98D102135B06B0020427F /* TuffysLandingScreenBackground.png */,
+				1CB98CE82134F1550020427F /* YellowJam.png */,
+				1CB98CE92134F1550020427F /* YellowJellyBean.png */,
+				1CB98D08213588710020427F /* TuffysLandingScreenBackground.png */,
+			);
+			name = Assets;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -1092,8 +1163,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CB98D09213588730020427F /* TuffysLandingScreenBackground.png in Resources */,
+				1CB98CFC2134F1560020427F /* PurpleJam.png in Resources */,
+				1CB98CF72134F1560020427F /* PinkJellyBean.png in Resources */,
+				1CB98D002134F1560020427F /* PurpleJellyBean.png in Resources */,
+				1CB98D0F2135AFF20020427F /* CloudsBackground.png in Resources */,
+				1CB98CFD2134F1560020427F /* BlueJellyBean.png in Resources */,
+				1CB98D012134F1560020427F /* RedJellyBean.png in Resources */,
+				1CB98CF82134F1560020427F /* RedJam.png in Resources */,
+				1CB98CFF2134F1560020427F /* OrangeJellyBean.png in Resources */,
+				1CB98D112135B06B0020427F /* TuffysLandingScreenBackground.png in Resources */,
+				1CB98CFA2134F1560020427F /* JellyJam.png in Resources */,
+				1CB98CF92134F1560020427F /* RainbowBean.png in Resources */,
+				1CB98CF52134F1560020427F /* YellowJam.png in Resources */,
+				1CB98CF62134F1560020427F /* YellowJellyBean.png in Resources */,
+				1CB98D152135B1070020427F /* JellyBeanJamLogo.png in Resources */,
+				1CB98D052134F2710020427F /* GreenJellyBean.png in Resources */,
+				1CB98D042134F2710020427F /* GreenJam.png in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				1CB98CFB2134F1560020427F /* PinkJam.png in Resources */,
+				1CB98D0D213595780020427F /* TuffyShrugging.png in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				1CB98CFE2134F1560020427F /* BlueJam.png in Resources */,
+				1CB98D132135B0830020427F /* BackGroundImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
