@@ -53,7 +53,7 @@ class GameScreen extends Component {
       restart: false,
       tuffysHeadLocation: new Animated.ValueXY(0, 0),
       gameModalLocation: new Animated.ValueXY(0, 0),
-      numberOfMoves: 1,
+      numberOfMoves: 25,
       jamScore: 0,
       totalScore: 0,
       beanScore: 0,
